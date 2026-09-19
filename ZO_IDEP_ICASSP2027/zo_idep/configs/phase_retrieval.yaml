@@ -1,0 +1,17 @@
+experiment: sparse_phase_retrieval
+development_seeds: [9300, 9301, 9302, 9303, 9304]
+report_seed_start: 62000
+report_seeds: 30
+dimensions: [128, 256]
+sparsities: [8, 16]
+measurement_rule: ceil(4*k*log(d))
+iterations: 600
+eta: 0.8/local_L
+mu: 0.0001
+mu_decay: 0.95
+lambda: 0.10
+continuation: 100
+noise_std: 0.0
+initializer: controlled_local_topk
+initializer_noise_std: 0.02
+initializer_note: diagnostic local-basin warm start uses planted synthetic solution

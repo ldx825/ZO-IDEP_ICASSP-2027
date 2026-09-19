@@ -1,0 +1,17 @@
+experiment: ridge_logistic
+development_seeds: [9200, 9201, 9202, 9203, 9204]
+report_seed_start: 12000
+report_seeds: 30
+m: 512
+d: 128
+k: 8
+iterations_mu_sweep: 800
+iterations_rate: 1000
+eta: 0.1/L
+lambda: 0.02
+continuation: 100
+ridge: 0.02
+a_min: 0.75
+mu_grid: [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03]
+beta_grid: [0.95, 0.97, 0.99]
+rate_mu_min: 0.000001

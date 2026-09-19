@@ -1,0 +1,17 @@
+experiment: sparse_regression
+development_seeds: [9100, 9101, 9102, 9103, 9104]
+report_seed_start: 2027
+report_seeds: 30
+settings:
+  - [128, 256, 16]
+  - [128, 256, 24]
+  - [128, 256, 32]
+  - [128, 512, 32]
+  - [128, 1024, 64]
+iterations: 300
+eta: 0.9/L
+mu: 0.001
+lambda: 0.025
+continuation: 100
+noise_std: 0.1
+a_min: 0.25
