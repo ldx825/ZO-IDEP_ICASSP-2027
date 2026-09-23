@@ -373,13 +373,14 @@ Oracle-EndSupport & 119.3 & 0/30 & 79.6\%\\
 
 The diagnostics (Figure~\ref{fig:diag}) agree with the theory. For $\mu\le10^{-2}$, all $30$ logistic runs certify, while at $3\times10^{-2}$ none switches; the measured identification margin correlates negatively with switch time ($r=-0.695$). Fixed-$\mu$ runs track the Proposition~\ref{prop:rsc} neighborhood; the restricted-optimum distance rises from $1.9\times10^{-10}$ to $2.3\times10^{-5}$ over the sweep. Under geometric smoothing, the empirical restricted contraction is $0.9820\pm0.0001$ for $\beta=.99$ versus the conservative $\rho=.99$ of Proposition~\ref{prop:rsc}, and $Q_{\rm IDEP}/Q_{\rm full}$ decreases from $.990$ at target $10^{-2}$ to $.715$ at $10^{-3}$. Heuristic stability rules freeze a wrong local support in $40$--$46.7\%$ of stress-test runs (Table~\ref{tab:freeze}). Phase-retrieval local-basin runs ($120/120$) satisfy the implemented certificate-form inequalities and save $48.5\%$ on average, as an empirical diagnostic with pointwise curvature surrogates.
 
+\enlargethispage{3\baselineskip}
 \section{Conclusion}
-ZO-IDEP makes the trimmed-$\ell_1$ exact-penalty route function-value only and propagates the ZO estimation error through convergence, identification, and certified query restriction. Once certified, inactive coordinate evaluations are provably redundant and the restricted trajectory exactly matches Full-ZO-EP. The certificate relies on a valid localization radius (Remark~\ref{rem:radius}); when the restricted objective is strongly convex, the geometric rates of Proposition~\ref{prop:rsc} apply.
+ZO-IDEP brings certified exact penalization to black-box, sparsity-constrained optimization: the trimmed-$\ell_1$ route runs on function values alone---no gradients of the true objective are needed---with the finite-difference error carried through convergence, identification, and certification. Once the invariant-support certificate fires, inactive coordinate queries are provably redundant and the restricted trajectory exactly matches Full-ZO-EP, cutting each step from $2d$ to $2k$ queries; experiments confirm exact post-switch step preservation and $58.3$--$62.5$\% budget savings where heuristic freezing fails. The certificate needs a valid localization radius (Remark~\ref{rem:radius}); strong convexity of the restricted objective yields the geometric rates of Proposition~\ref{prop:rsc}; nonconvex extensions remain open.
 
 \section{Appendix: Proofs}
 The main proofs are collected here.
-\setlength{\abovedisplayskip}{6pt plus 1pt minus 1pt}
-\setlength{\belowdisplayskip}{6pt plus 1pt minus 1pt}
+\setlength{\abovedisplayskip}{4pt plus 1pt minus 1pt}
+\setlength{\belowdisplayskip}{4pt plus 1pt minus 1pt}
 
 \medskip
 \begin{proof}[Proof of Lemma~\ref{lem:fd}]
