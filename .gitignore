@@ -16,3 +16,34 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# ---------------------------------------------------------------------------
+# Not part of the public code release (kept locally, never committed).
+# ---------------------------------------------------------------------------
+# Paper sources: only the compiled paper/main.pdf is tracked.
+/ZO_IDEP_ICASSP2027/*.tex
+/ZO_IDEP_ICASSP2027/*.bib
+/ZO_IDEP_ICASSP2027/*.sty
+/ZO_IDEP_ICASSP2027/*.bst
+/ZO_IDEP_ICASSP2027/Makefile
+/ZO_IDEP_ICASSP2027/.gitignore
+/ZO_IDEP_ICASSP2027/figures/
+/ZO_IDEP_ICASSP2027/official_template/
+
+# Internal paper notes and reports
+/ZO_IDEP_ICASSP2027/README.md
+/ZO_IDEP_ICASSP2027/CITATION_AUDIT.md
+/ZO_IDEP_ICASSP2027/EXPERIMENT_CHECKLIST.md
+/ZO_IDEP_ICASSP2027/EXPERIMENT_REPORT.md
+/ZO_IDEP_ICASSP2027/REVIEW_AND_NOVELTY.md
+/ZO_IDEP_ICASSP2027/THEORY_WORKING_NOTE.md
+
+# Generated experiment results and the superseded prototype pipeline
+/ZO_IDEP_ICASSP2027/results/
+/ZO_IDEP_ICASSP2027/zo_idep/results/
+/ZO_IDEP_ICASSP2027/scripts/
+
+# Python caches / environments
+__pycache__/
+*.pyc
+.venv/
