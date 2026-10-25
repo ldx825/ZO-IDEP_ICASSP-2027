@@ -18,7 +18,7 @@ Exact-penalty methods turn the cardinality constraint `min f(x) s.t. ‖x‖₀ 
 * **Proximal map (Sec. 3, Eq. 2–3).** `P_η(z) = argmin_u {λ h_k(u) + ‖u−z‖²/2η}` has the closed form: keep the `k` largest-magnitude coordinates, soft-threshold the rest.
 * **ZO gradient (Sec. 3, Eq. 4; Lemma 1).** Coordinate central differences `ĝ_i = (f(x+μe_i) − f(x−μe_i))/2μ` with `‖ĝ − ∇f‖_∞ ≤ Lμ/2`, i.e. `2d` queries per full step.
 * **Certified support restriction (Sec. 4.2, Thm. 3).** From a valid localization radius `D_t` and error sequence `{ε_{t+s}}` the code forms `R_t = D_t + η√k·B_t`, `H_t = ‖ĝ_{S^c}‖_∞ + ε_t + 2LR_t`, `A_t = min_{i∈S}|x_i| − 2R_t − η(LR_t + ε̄_t)` and tests `H_t + ε̄_t < λ`, `A_t > η(H_t + ε̄_t)`. When it passes, every later iterate stays on `S` **and** the hypothetical full-coordinate proximal step returns exactly the same point, so `2d` queries per step collapse to `2k` (query ratio → `k/d`, Cor. 1).
-* **Theory (Sec. 4.1).** Convergence to a sparse proximal fixed point, finite support identification, and a geometric post-switch rate under restricted strong convexity (Prop. 2).
+* **Theory (Sec. 4.1).** Convergence to a sparse proximal fixed point, finite support identification, and a geometric post-switch rate under restricted strong convexity (Prop. 1).
 * **Numerics (Sec. 5).** Exact post-switch step preservation, 58.3–62.5% finite-budget query savings, and the failure of heuristic "stable-support freeze" rules that the certificate replaces.
 
 ### 1.2 Where the method lives
@@ -28,7 +28,7 @@ Exact-penalty methods turn the cardinality constraint `min f(x) s.t. ‖x‖₀ 
 | [`ZO_IDEP_ICASSP2027/zo_idep/src/prox.py`](ZO_IDEP_ICASSP2027/zo_idep/src/prox.py) | Deterministic global proximal map of the trimmed-ℓ₁ penalty (Eq. 2–3), with `stable_topk()` tie-breaking so "strict margins" are well defined. |
 | [`ZO_IDEP_ICASSP2027/zo_idep/src/finite_difference.py`](ZO_IDEP_ICASSP2027/zo_idep/src/finite_difference.py) | Coordinate central differences with exact query counting and an optional query log (Eq. 4, Lemma 1). |
 | [`ZO_IDEP_ICASSP2027/zo_idep/src/algorithms.py`](ZO_IDEP_ICASSP2027/zo_idep/src/algorithms.py) | Algorithm 1: full-coordinate phase, switch test, restricted phase, continuation/smoothing schedule, per-step query accounting. |
-| [`ZO_IDEP_ICASSP2027/zo_idep/src/certificate.py`](ZO_IDEP_ICASSP2027/zo_idep/src/certificate.py) | Theorem 3 (invariant-support certificate) and the Prop. 2 strongly-convex specialization, returning every intermediate quantity (`R`, `H`, `A`, `q`, margins) for auditing. |
+| [`ZO_IDEP_ICASSP2027/zo_idep/src/certificate.py`](ZO_IDEP_ICASSP2027/zo_idep/src/certificate.py) | Theorem 3 (invariant-support certificate) and the Prop. 1 strongly-convex specialization, returning every intermediate quantity (`R`, `H`, `A`, `q`, margins) for auditing. |
 | [`ZO_IDEP_ICASSP2027/zo_idep/src/diagnostics.py`](ZO_IDEP_ICASSP2027/zo_idep/src/diagnostics.py) | Offline theorem diagnostics (stationarity witness, support margin). Analytical gradients are used **only** here, never to drive an update. |
 | [`ZO_IDEP_ICASSP2027/zo_idep/src/objectives.py`](ZO_IDEP_ICASSP2027/zo_idep/src/objectives.py) | Synthetic smooth objectives (least squares, ridge-logistic, phase retrieval) with vectorized, auditable ZO oracles. |
 | [`ZO_IDEP_ICASSP2027/zo_idep/src/utils.py`](ZO_IDEP_ICASSP2027/zo_idep/src/utils.py) | Seeding, result IO (raw records + aggregate JSON), config loading. |
@@ -43,7 +43,7 @@ Exact-penalty methods turn the cardinality constraint `min f(x) s.t. ‖x‖₀ 
 | Sec. 3, Algorithm 1 — full phase → switch → restricted phase | `zo_idep/src/algorithms.py` (with `zo_idep/src/certificate.py` as the switch test) |
 | Sec. 4.1 — convergence to a sparse proximal fixed point, finite identification | `zo_idep/experiments/exp03_margin_sweep.py` (identification margin vs switch time), `exp02_mu_sweep.py` (estimator-error sweep) |
 | Sec. 4.2, Thm. 3 — invariant-support certificate | `zo_idep/src/certificate.py`; independent check in [`verify_zo_idep_convex_certificate.py`](verify_zo_idep_convex_certificate.py) |
-| Sec. 4.2, Prop. 2 / Cor. 1 — post-switch geometric rate and `Q_IDEP/Q_full → k/d` | `zo_idep/src/certificate.py` (strong-convex branch), `zo_idep/experiments/exp05_rate_and_accuracy.py` |
+| Sec. 4.2, Prop. 1 / Cor. 1 — post-switch geometric rate and `Q_IDEP/Q_full → k/d` | `zo_idep/src/certificate.py` (strong-convex branch), `zo_idep/experiments/exp05_rate_and_accuracy.py` |
 | Sec. 5 — main sparse-regression table with theorem diagnostics | `zo_idep/experiments/exp01_sparse_regression.py` |
 | Sec. 5 — certified switch vs "stable-support freeze" heuristics | `zo_idep/experiments/exp04_certificate_vs_heuristic.py` |
 | Sec. 5 — locally nonconvex (sparse phase retrieval) diagnostic | `zo_idep/experiments/exp06_sparse_phase_retrieval.py` |
